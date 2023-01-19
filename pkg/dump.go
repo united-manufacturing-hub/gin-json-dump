@@ -48,7 +48,6 @@ func Dump() gin.HandlerFunc {
 		ShowReqPath:   true,
 		ShowReqMethod: true,
 		ShowReqQuery:  true,
-		Formatted:     true,
 	})
 }
 
