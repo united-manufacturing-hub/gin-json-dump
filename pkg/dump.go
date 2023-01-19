@@ -56,7 +56,7 @@ type DumpData struct {
 	Response DumpResponse
 }
 
-func (d *DumpData) toJSONString() string {
+func (d *DumpData) ToJSONString() string {
 	marshal, err := jsoniter.Marshal(d)
 	if err != nil {
 		return err.Error()
