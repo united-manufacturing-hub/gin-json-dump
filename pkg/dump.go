@@ -48,6 +48,7 @@ func Dump() gin.HandlerFunc {
 		ShowReqPath:   true,
 		ShowReqMethod: true,
 		ShowReqQuery:  true,
+		Formatted:     true,
 	})
 }
 
@@ -57,7 +58,14 @@ type DumpData struct {
 }
 
 func (d *DumpData) ToJSONString() string {
-	marshal, err := jsoniter.Marshal(d)
+	marshal, err := jsoniter.MarshalToString(d)
+	if err != nil {
+		return err.Error()
+	}
+	return marshal
+}
+func (d *DumpData) ToJSONFormattedString() string {
+	marshal, err := jsoniter.MarshalIndent(d, "", "  ")
 	if err != nil {
 		return err.Error()
 	}
