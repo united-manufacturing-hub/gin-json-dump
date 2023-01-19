@@ -92,7 +92,8 @@ func DumpWithOptions(options Options) gin.HandlerFunc {
 		handleRequest(ctx, &dumpData, options)
 
 		// Execute the next handler
-		ctx.Writer = &bodyWriter{ctx.Writer, bytes.NewBufferString("")}
+		w := &bodyWriter{ctx.Writer, bytes.NewBufferString("")}
+		ctx.Writer = w
 		ctx.Next()
 
 		handleResponse(ctx, &dumpData, options)
@@ -111,6 +112,7 @@ func handleRequest(ctx *gin.Context, d *DumpData, options Options) {
 
 	if options.ShowReqBody {
 		buf, err := io.ReadAll(ctx.Request.Body)
+		ctx.Request.Body = io.NopCloser(bytes.NewBuffer(buf))
 		if err != nil {
 			d.Request.Body = map[string]interface{}{
 				"error": err.Error(),
