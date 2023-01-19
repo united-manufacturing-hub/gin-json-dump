@@ -29,3 +29,7 @@ func main() {
     r.Run()
 }
 ```
+
+### Thanks
+
+This middleware is inspired by [gin-dump](https://github.com/tpkeeper/gin-dump)

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"github.com/gin-gonic/gin"
 	jsoniter "github.com/json-iterator/go"
-	"github.com/united-manufacturing-hub/gin-json-dump/pkg"
+	ginjsondump "github.com/united-manufacturing-hub/gin-json-dump/pkg"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -45,7 +45,7 @@ func Test_Matrix(t *testing.T) {
 	}
 
 	router := gin.New()
-	router.Use(pkg.Dump())
+	router.Use(ginjsondump.Dump())
 
 	router.GET("/dump", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
